@@ -10,6 +10,8 @@ public class Game {
 
         int attempts = 0;
         int maxguess = 3;
+        int score = 0;
+        int roundwon = 0;
         
 
         System.out.println("Think of a number between 1 and 100");
@@ -18,6 +20,7 @@ public class Game {
 
         while(attempts < maxguess){
             attempts ++;
+            
 
             System.out.println("Enter your choice:");
             int choice = scanner.nextInt();
@@ -25,6 +28,8 @@ public class Game {
         // System.out.println(number);
         if(choice == number){
 
+            roundwon ++;
+            score += (maxguess - attempts +1 );
         System.out.println("You made it");
         break;
         }
@@ -37,8 +42,12 @@ public class Game {
         if(attempts == maxguess){
             System.out.println("Sorry you have reached maximum attempts");
             System.out.println("The number was "+ number);
+           
         }
+       
         }
+        System.out.println("The number of round won is: "+roundwon);
+        System.out.println("The score is: "+score);
         scanner.close();
     }
 }
