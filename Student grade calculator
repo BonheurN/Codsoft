@@ -1,0 +1,68 @@
+import java.util.Scanner;
+
+public class Student_grade_calculator {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        double totalMarks = 0;
+        int subjectCount = 8;
+
+        try {
+            System.out.println("Here you will be entering marks you scored in each subject");
+
+            totalMarks += getValidMarks(scanner, "Maths");
+            totalMarks += getValidMarks(scanner, "Biology");
+            totalMarks += getValidMarks(scanner, "Chemistry");
+            totalMarks += getValidMarks(scanner, "Physics");
+            totalMarks += getValidMarks(scanner, "Geography");
+            totalMarks += getValidMarks(scanner, "History");
+            totalMarks += getValidMarks(scanner, "English");
+            totalMarks += getValidMarks(scanner, "Literature");
+
+            double averageMarks = totalMarks / subjectCount;
+            double averagePercentage = (averageMarks / 100) * 100; // Since marks are out of 100
+            String grade = calculateGrade(averagePercentage);
+
+            System.out.println("Total Marks: " + totalMarks);
+            System.out.println("Average Marks: " + averageMarks);
+            System.out.println("Average Percentage: " + averagePercentage + "%");
+            System.out.println("Grade: " + grade);
+        } finally {
+            scanner.close();
+        }
+    }
+
+    private static double getValidMarks(Scanner scanner, String subject) {
+        double marks = -1;
+
+        while (true) {
+            System.out.print("Enter marks you got in " + subject + " subject: ");
+            if (scanner.hasNextDouble()) {
+                marks = scanner.nextDouble();
+                if (marks >= 0 && marks <= 100) {
+                    break;
+                } else {
+                    System.out.println("Please enter a number between 0 and 100.");
+                }
+            } else {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.next(); // Clear the invalid input
+            }
+        }
+        return marks;
+    }
+
+    private static String calculateGrade(double averagePercentage) {
+        if (averagePercentage >= 90) {
+            return "A";
+        } else if (averagePercentage >= 80) {
+            return "B";
+        } else if (averagePercentage >= 70) {
+            return "C";
+        } else if (averagePercentage >= 60) {
+            return "D";
+        } else {
+            return "F";
+        }
+    }
+}
